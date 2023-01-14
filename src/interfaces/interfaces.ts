@@ -4,13 +4,13 @@ export interface Launch {
 }
 
 export interface INews {
-  id?: number;
-  title?: string;
+  id: number;
+  title: string;
   url?: string;
-  imageUrl?: string;
+  imageUrl: string;
   newsSite?: string;
-  summary?: string;
-  publishedAt?: string | Date;
+  summary: string;
+  publishedAt: string | Date;
   updatedAt?: Date;
   featured?: boolean;
   launches?: Launch[];

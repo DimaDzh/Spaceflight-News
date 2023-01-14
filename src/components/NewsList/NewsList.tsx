@@ -1,28 +1,15 @@
-import { FC, useState } from "react";
+import { FC } from "react";
+import { useAppSelector } from "../../hooks/redux-hooks";
+
 import Grid from "@mui/material/Grid";
 import NewsItem from "../NewsItem/NewsItem";
 
-import { data } from "../assets/data/data";
-
-import { INews } from "../../interfaces/interfaces";
-
-interface INewsListProps {
-  data?: INews[];
-}
-
-const NewsList = (props: INewsListProps) => {
+const NewsList: FC = () => {
+  const dataNews = useAppSelector((state) => state.fetchNewsReducer.list);
   return (
     <Grid container spacing={2}>
-      {data.map((item) => {
-        return (
-          <NewsItem
-            id={item.id}
-            title={item.title}
-            imageUrl={item.imageUrl}
-            summary={item.summary}
-            publishedAt={item.publishedAt}
-          />
-        );
+      {dataNews.map((item) => {
+        return <NewsItem key={item.id} {...item} />;
       })}
     </Grid>
   );

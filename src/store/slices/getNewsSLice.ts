@@ -5,9 +5,11 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
+import axios from "axios";
+
 import { INews } from "../../interfaces/interfaces";
 
-interface IList extends INews {
+export interface IList extends INews {
   completed: boolean;
 }
 
@@ -15,58 +17,39 @@ interface NewsListState {
   list: IList[];
   loading: boolean;
   error: string | null;
+  filter: string;
 }
-
-// export const fetchNews = createAsyncThunk<
-//   IList[],
-//   undefined,
-//   { rejectValue: string }
-// >("news/fetchNEews", async function (_, { rejectWithValue }) {
-//   try {
-//     const response = await fetch(
-//       "https://api.spaceflightnewsapi.net/v3/articles"
-//     );
-
-//     if (!response.ok) {
-//       return rejectWithValue("Server Error!");
-//     }
-
-//     const data = await response.json();
-//     console.log(data);
-//     return data;
-//   } catch (error: any) {
-//     return rejectWithValue(error.message);
-//   }
-// });
 
 export const fetchNews = createAsyncThunk<
   IList[],
   undefined,
   { rejectValue: string }
->("news/fetchNEews", async function (_, { rejectWithValue }) {
-  const response = await fetch(
-    "https://api.spaceflightnewsapi.net/v3/articles"
-  );
-
-  if (!response.ok) {
-    return rejectWithValue("Server Error!");
+>("news/fetchNews", async function (_, { rejectWithValue }) {
+  try {
+    const { data } = await axios.get(
+      "https://api.spaceflightnewsapi.net/v3/articles"
+    );
+    return data;
+  } catch (error: any) {
+    return rejectWithValue(error.message);
   }
-
-  const data = await response.json();
-
-  return data;
 });
 
 const initialState: NewsListState = {
   list: [],
   loading: false,
   error: null,
+  filter: "",
 };
 
 const newsListSlice = createSlice({
   name: "news",
   initialState,
-  reducers: {},
+  reducers: {
+    setFilter: (state, action: PayloadAction<string>) => {
+      state.filter = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNews.pending, (state) => {
@@ -83,6 +66,8 @@ const newsListSlice = createSlice({
       });
   },
 });
+
+export const { setFilter } = newsListSlice.actions;
 
 export default newsListSlice.reducer;
 

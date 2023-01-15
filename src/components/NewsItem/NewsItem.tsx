@@ -1,5 +1,5 @@
+import { useNavigate } from "react-router-dom";
 import {
-  Box,
   Button,
   Card,
   CardActionArea,
@@ -9,6 +9,8 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+
+import { useAppSelector } from "../../hooks/redux-hooks";
 
 import { INews } from "../../interfaces/interfaces";
 
@@ -26,6 +28,12 @@ const NewsItem = ({
   summary,
   publishedAt,
 }: INewsItemProps) => {
+  // const filter = useAppSelector((state) => state.fetchNewsReducer.filter);
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/article/${id}`);
+  };
   return (
     <Grid
       key={id}
@@ -70,7 +78,7 @@ const NewsItem = ({
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="inherit">
+          <Button size="small" color="inherit" onClick={handleNavigate}>
             Read more <ArrowForwardOutlinedIcon />
           </Button>
         </CardActions>

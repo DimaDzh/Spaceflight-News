@@ -1,14 +1,16 @@
-import { TextField, Container, Typography, Box } from "@mui/material";
-import { ChangeEvent } from "react";
+import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { TextField, Typography, Box } from "@mui/material";
+import { setFilter } from "../../store/slices/getNewsSLice";
 
-interface ISearchProps {
-  onChange?: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  value?: string;
-}
+const Search: FC = () => {
+  const dispath = useAppDispatch();
 
-const Search = ({ onChange, value }: ISearchProps) => {
+  const findArticles = useAppSelector((state) => state.fetchNewsReducer.filter);
+
+  const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispath(setFilter(event.target.value));
+  };
   return (
     <Box
       sx={{
@@ -23,7 +25,8 @@ const Search = ({ onChange, value }: ISearchProps) => {
         label="The Spaceflight News"
         variant="outlined"
         fullWidth
-        onChange={onChange}
+        onChange={onHandleChange}
+        value={findArticles}
       />
     </Box>
   );

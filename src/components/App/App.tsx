@@ -1,4 +1,4 @@
-import { FC, Suspense, useEffect, useState } from "react";
+import { FC, Suspense, useEffect, useMemo, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import HomePage from "../../Pages/HomePage";
@@ -6,13 +6,26 @@ import NewsArticlesPage from "../../Pages/NewsArticlesPage";
 import { fetchNews } from "../../store/slices/getNewsSLice";
 
 import { AnimatePresence } from "framer-motion";
-
+import DarkMode from "../assets/theme/DarkMode";
 import SkeletonItem from "../Skeleton/SkeletonItem";
-import "./App.css";
+import "./App.scss";
+import { useMediaQuery, createTheme, ThemeProvider } from "@mui/material";
 
 const App: FC = () => {
   const { loading, error, list } = useAppSelector(
     (state) => state.fetchNewsReducer
+  );
+
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode]
   );
 
   const dispatch = useAppDispatch();
@@ -25,20 +38,21 @@ const App: FC = () => {
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        <Suspense fallback={<SkeletonItem />}>
-          <Routes key={location.pathname} location={location}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="article/:articleId/" element={<NewsArticlesPage />} />
-          </Routes>
-        </Suspense>
-      </AnimatePresence>
+      <ThemeProvider theme={theme}>
+        <AnimatePresence mode="wait">
+          <Suspense fallback={<SkeletonItem />}>
+            <Routes key={location.pathname} location={location}>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="article/:articleId/"
+                element={<NewsArticlesPage />}
+              />
+            </Routes>
+          </Suspense>
+        </AnimatePresence>
+      </ThemeProvider>
     </>
   );
 };
 
 export default App;
-
-function useRouter(): { location: any } {
-  throw new Error("Function not implemented.");
-}

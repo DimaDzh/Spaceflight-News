@@ -10,9 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useAppSelector } from "../../hooks/redux-hooks";
-
 import { INews } from "../../interfaces/interfaces";
+
+import "./style.scss";
 
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
@@ -45,9 +45,10 @@ const NewsItem = ({
         mb: "45px",
         maxHeight: "530px",
       }}
+      className="card__wrapper"
     >
-      <Card sx={{ maxWidth: "400px", height: "100%" }}>
-        <CardActionArea>
+      <Card className="card">
+        <CardActionArea className="card__content">
           <CardMedia
             component="img"
             height="140"
@@ -77,7 +78,7 @@ const NewsItem = ({
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
+        <CardActions className="card__footer">
           <Button size="small" color="inherit" onClick={handleNavigate}>
             Read more <ArrowForwardOutlinedIcon />
           </Button>

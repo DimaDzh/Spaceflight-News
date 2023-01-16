@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import { TextField, Typography, Box } from "@mui/material";
 import { setFilter } from "../../store/slices/getNewsSLice";
 
+import "./style.scss";
+
 const Search: FC = () => {
   const dispath = useAppDispatch();
 
@@ -12,12 +14,8 @@ const Search: FC = () => {
     dispath(setFilter(event.target.value));
   };
   return (
-    <Box
-      sx={{
-        mb: "10px",
-      }}
-    >
-      <Typography variant="h6" component="h6">
+    <Box className="search__box">
+      <Typography variant="h6" component="h4">
         Filter by keywords
       </Typography>
       <TextField

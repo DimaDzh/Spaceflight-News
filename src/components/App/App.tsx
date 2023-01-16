@@ -6,7 +6,6 @@ import NewsArticlesPage from "../../Pages/NewsArticlesPage";
 import { fetchNews } from "../../store/slices/getNewsSLice";
 
 import { AnimatePresence } from "framer-motion";
-import DarkMode from "../assets/theme/DarkMode";
 import SkeletonItem from "../Skeleton/SkeletonItem";
 import "./App.scss";
 import { useMediaQuery, createTheme, ThemeProvider } from "@mui/material";

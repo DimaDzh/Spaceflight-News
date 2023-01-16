@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import { FC } from "react";
 import { Skeleton, Stack } from "@mui/material";
-import { useAppSelector } from "../../hooks/redux-hooks";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-type Props = {};
-
-const SkeletonItem = (props: Props) => {
+const SkeletonItem: FC = () => {
   return (
     <Grid
       item
@@ -37,5 +34,3 @@ const SkeletonItem = (props: Props) => {
 };
 
 export default SkeletonItem;
-
-//

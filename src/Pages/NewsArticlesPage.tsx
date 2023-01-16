@@ -15,9 +15,7 @@ import {
 import { ArrowBack } from "@mui/icons-material";
 import AnimatedPage from "./AnimatedPage";
 
-type Props = {};
-
-const NewsArticlesPage: FC = (props: Props) => {
+const NewsArticlesPage: FC = () => {
   const articles = useAppSelector((state) => state.fetchNewsReducer.list);
   const { articleId } = useParams();
   const navigate = useNavigate();

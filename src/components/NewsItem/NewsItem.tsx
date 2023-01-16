@@ -28,7 +28,6 @@ const NewsItem = ({
   summary,
   publishedAt,
 }: INewsItemProps) => {
-  // const filter = useAppSelector((state) => state.fetchNewsReducer.filter);
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -42,7 +41,6 @@ const NewsItem = ({
       md={6}
       lg={4}
       sx={{
-        mb: "45px",
         maxHeight: "530px",
       }}
       className="card__wrapper"

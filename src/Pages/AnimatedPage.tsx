@@ -6,7 +6,11 @@ const animations = {
   exit: { opacity: 0, y: -50 },
 };
 
-const AnimatedPage = ({ children }: any) => {
+type AnimatedPageProps = {
+  children: JSX.Element | React.ReactNode;
+};
+
+const AnimatedPage = ({ children }: AnimatedPageProps) => {
   return (
     <motion.div
       variants={animations}

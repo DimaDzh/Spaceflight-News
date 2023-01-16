@@ -5,6 +5,9 @@ import Grid from "@mui/material/Grid";
 import NewsItem from "../NewsItem/NewsItem";
 import SkeletonItem from "../Skeleton/SkeletonItem";
 import { INews } from "../../interfaces/interfaces";
+import { Box, Divider, Typography } from "@mui/material";
+
+import "./style.scss";
 
 const NewsList: FC = () => {
   const getFilteredList = (list: INews[], keywords: string[]) => {
@@ -24,17 +27,26 @@ const NewsList: FC = () => {
   };
 
   const dataNews = useAppSelector((state) => state.fetchNewsReducer.list);
-  const { loading, error } = useAppSelector((state) => state.fetchNewsReducer);
+  const { loading } = useAppSelector((state) => state.fetchNewsReducer);
   const filter = useAppSelector((state) => state.fetchNewsReducer.filter);
   const list = getFilteredList(dataNews, filter.split(" "));
 
   return (
-    <Grid container spacing={2}>
-      {loading && <SkeletonItem />}
-      {list.map((item) => {
-        return <NewsItem key={item.id} {...item} />;
-      })}
-    </Grid>
+    <>
+      <Box className="results__section">
+        <Typography variant="h6" component="h4">
+          {filter ? `Find: ${list.length}` : `Results: ${list.length} articles`}
+        </Typography>
+      </Box>
+      <Divider sx={{ mb: "50px" }} />
+
+      <Grid container spacing={2}>
+        {loading && <SkeletonItem />}
+        {list.map((item) => {
+          return <NewsItem key={item.id} {...item} />;
+        })}
+      </Grid>
+    </>
   );
 };
 

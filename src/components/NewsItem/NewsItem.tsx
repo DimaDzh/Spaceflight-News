@@ -16,6 +16,9 @@ import "./style.scss";
 
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
+import { useCallback } from "react";
+import HighlightedText from "../HighlightedText/HighlightedText";
+import { useAppSelector } from "../../hooks/redux-hooks";
 
 interface INewsItemProps extends INews {
   handleClick?: (event: UIEvent) => void;
@@ -28,11 +31,21 @@ const NewsItem = ({
   summary,
   publishedAt,
 }: INewsItemProps) => {
+  const filter = useAppSelector((state) => state.fetchNewsReducer.filter);
+
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate(`/article/${id}`);
   };
+
+  const lightText = useCallback(
+    (str: string) => {
+      return <HighlightedText filter={filter} str={str} />;
+    },
+    [filter]
+  );
+
   return (
     <Grid
       key={id}
@@ -69,10 +82,10 @@ const NewsItem = ({
           </Typography>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h3">
-              {title}
+              {lightText(title)}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {summary}
+              {lightText(summary)}
             </Typography>
           </CardContent>
         </CardActionArea>

@@ -1,0 +1,13 @@
+.title__container {
+  width: 100%;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  @media (min-width: 1024px) {
+    transform: translate(0, -75px);
+  }
+}

@@ -90,7 +90,12 @@ const NewsItem = ({
           </CardContent>
         </CardActionArea>
         <CardActions className="card__footer">
-          <Button size="small" color="inherit" onClick={handleNavigate}>
+          <Button
+            size="small"
+            color="inherit"
+            onClick={handleNavigate}
+            className="arrow"
+          >
             Read more <ArrowForwardOutlinedIcon />
           </Button>
         </CardActions>

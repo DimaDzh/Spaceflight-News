@@ -15,6 +15,9 @@ import {
 import { ArrowBack } from "@mui/icons-material";
 import AnimatedPage from "./AnimatedPage";
 
+import "./style.scss";
+import Text from "./assets/Text";
+
 const NewsArticlesPage: FC = () => {
   const articles = useAppSelector((state) => state.fetchNewsReducer.list);
   const { articleId } = useParams();
@@ -29,38 +32,57 @@ const NewsArticlesPage: FC = () => {
     if (!article) navigate("/notFound");
   }, [article, navigate]);
 
+  const articleLenght = article?.summary.split("\n").length;
+  console.log(articleLenght);
+  const moreHundred = articleLenght && articleLenght > 100 ? true : false;
+
   return (
     <>
       <AnimatedPage>
-        <Grid container spacing={2}>
-          <Container fixed maxWidth="md" key={article?.id}>
-            <Card className="modal" sx={{ maxWidth: "100%", height: "100%" }}>
+        <Container className="title__container">
+          <CardMedia
+            component="img"
+            height="245px"
+            image={article?.imageUrl}
+            alt={article?.title}
+          />
+        </Container>
+        <Grid className="title__container">
+          <Container
+            fixed
+            maxWidth="md"
+            key={article?.id}
+            className="article__wrapper"
+          >
+            <Card className="article">
               <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="245"
-                  image={article?.imageUrl}
-                  alt={article?.title}
-                />
-
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h3">
                     {article?.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mb: 2 }}
+                  >
                     {article?.summary}
+                    {!moreHundred ? <Text /> : ""}
                   </Typography>
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="inherit" onClick={goBack}>
+                <Button
+                  size="small"
+                  color="inherit"
+                  onClick={goBack}
+                  className="arrow"
+                >
                   <ArrowBack />
                   Back to home page
                 </Button>
               </CardActions>
             </Card>
           </Container>
-          ;
         </Grid>
       </AnimatedPage>
     </>

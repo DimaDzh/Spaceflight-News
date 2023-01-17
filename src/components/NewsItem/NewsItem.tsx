@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import {
+  Box,
   Button,
   Card,
   CardActionArea,
@@ -84,9 +85,15 @@ const NewsItem = ({
             <Typography gutterBottom variant="h5" component="h3">
               {lightText(title)}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {lightText(summary)}
-            </Typography>
+            <Box className="summary__wrapper">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className="summary__section"
+              >
+                {lightText(summary)}
+              </Typography>
+            </Box>
           </CardContent>
         </CardActionArea>
         <CardActions className="card__footer">

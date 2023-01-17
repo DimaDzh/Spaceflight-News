@@ -8,5 +8,19 @@
     @media (max-width: 1024px) {
       width: 100%;
     }
+    .summary__wrapper {
+      width: 100%;
+      height: calc(25px * 3);
+      overflow: hidden;
+      line-height: 25px;
+      text-align: justify;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      max-height: 10%;
+      .summary__section {
+        height: 50px;
+      }
+    }
   }
 }

@@ -10,7 +10,7 @@ export interface INews {
   imageUrl: string;
   newsSite?: string;
   summary: string;
-  publishedAt: string | Date;
+  publishedAt: string | number | Date;
   updatedAt?: Date;
   featured?: boolean;
   launches?: Launch[];

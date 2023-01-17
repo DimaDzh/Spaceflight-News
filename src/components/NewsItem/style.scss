@@ -22,5 +22,15 @@
         height: 50px;
       }
     }
+    .date__box {
+      display: flex;
+      align-items: center;
+      margin: 25px;
+      color: #363636;
+      opacity: 0.6;
+      svg {
+        margin-right: 5px;
+      }
+    }
   }
 }

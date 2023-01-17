@@ -33,7 +33,6 @@ const NewsItem = ({
   publishedAt,
 }: INewsItemProps) => {
   const filter = useAppSelector((state) => state.fetchNewsReducer.filter);
-
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -46,6 +45,14 @@ const NewsItem = ({
     },
     [filter]
   );
+
+  const locale = navigator.language;
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    day: "numeric", // 2-digit
+    month: "long", // numeric "2-digit", "narrow", "short" и "long"
+    year: "numeric", // 2-digit
+  };
+  const UserDate = new Intl.DateTimeFormat(locale, dateOptions);
 
   return (
     <Grid
@@ -67,20 +74,14 @@ const NewsItem = ({
             image={imageUrl}
             alt={title}
           />
-          <Typography
-            variant="body1"
-            component="span"
-            sx={{ color: "#363636", opacity: 0.6, fontSize: "14px" }}
-          >
-            <CalendarMonthOutlinedIcon />
-          </Typography>
-          <Typography
-            variant="body1"
-            component="span"
-            sx={{ color: "#363636", opacity: 0.6, fontSize: "14px" }}
-          >
-            {publishedAt?.toLocaleString()}
-          </Typography>
+          <Box className="date__box">
+            <Typography variant="body1" component="span">
+              <CalendarMonthOutlinedIcon />
+            </Typography>
+            <Typography variant="body1" component="span">
+              {UserDate.format(new Date(publishedAt))}
+            </Typography>
+          </Box>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h3">
               {lightText(title)}
@@ -112,3 +113,6 @@ const NewsItem = ({
 };
 
 export default NewsItem;
+function getDateTime(dateStr: string) {
+  throw new Error("Function not implemented.");
+}

@@ -11,9 +11,7 @@ import "./App.scss";
 import { useMediaQuery, createTheme, ThemeProvider } from "@mui/material";
 
 const App: FC = () => {
-  const { loading, error, list } = useAppSelector(
-    (state) => state.fetchNewsReducer
-  );
+  const { list } = useAppSelector((state) => state.fetchNewsReducer);
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 

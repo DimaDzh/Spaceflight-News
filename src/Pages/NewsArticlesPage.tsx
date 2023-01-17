@@ -17,7 +17,7 @@ import AnimatedPage from "../components/Animations/AnimatedPage";
 
 import "./style.scss";
 import Text from "./assets/Text";
-
+import ScrollToTop from "../components/BackToTop/ScrollToTop";
 const NewsArticlesPage: FC = () => {
   const articles = useAppSelector((state) => state.fetchNewsReducer.list);
   const { articleId } = useParams();
@@ -39,51 +39,54 @@ const NewsArticlesPage: FC = () => {
   return (
     <>
       <AnimatedPage>
-        <Container className="title__container">
-          <CardMedia
-            component="img"
-            height="245px"
-            image={article?.imageUrl}
-            alt={article?.title}
-          />
-        </Container>
-        <Grid className="title__container">
-          <Container
-            fixed
-            maxWidth="md"
-            key={article?.id}
-            className="article__wrapper"
-          >
-            <Card className="article">
-              <CardActionArea>
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h3">
-                    {article?.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mb: 2 }}
-                  >
-                    {article?.summary}
-                    {!moreHundred ? <Text /> : ""}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button
-                  size="small"
-                  color="inherit"
-                  onClick={goBack}
-                  className="arrow"
-                >
-                  <ArrowBack />
-                  Back to home page
-                </Button>
-              </CardActions>
-            </Card>
+        <Container id="back-to-top-anchor">
+          <Container className="title__container">
+            <CardMedia
+              component="img"
+              height="245px"
+              image={article?.imageUrl}
+              alt={article?.title}
+            />
           </Container>
-        </Grid>
+          <Grid className="title__container">
+            <Container
+              fixed
+              maxWidth="md"
+              key={article?.id}
+              className="article__wrapper"
+            >
+              <Card className="article">
+                <CardActionArea>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h3">
+                      {article?.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ mb: 2 }}
+                    >
+                      {article?.summary}
+                      {!moreHundred ? <Text /> : ""}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button
+                    size="small"
+                    color="inherit"
+                    onClick={goBack}
+                    className="arrow"
+                  >
+                    <ArrowBack />
+                    Back to home page
+                  </Button>
+                </CardActions>
+              </Card>
+            </Container>
+          </Grid>
+        </Container>
+        <ScrollToTop />
       </AnimatedPage>
     </>
   );

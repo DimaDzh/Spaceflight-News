@@ -2,16 +2,17 @@ import React, { FC } from "react";
 import { Container } from "@mui/material";
 import Search from "../components/Search/Search";
 import NewsList from "../components/NewsList/NewsList";
-import AnimatedPage from "./AnimatedPage";
+import AnimatedPage from "../components/Animations/AnimatedPage";
 
 const HomePage: FC = () => {
   return (
-    <AnimatedPage>
-      <Container>
-        <Search />
+    <Container>
+      <Search />
+      <AnimatedPage>
+        {" "}
         <NewsList />
-      </Container>
-    </AnimatedPage>
+      </AnimatedPage>
+    </Container>
   );
 };
 export default HomePage;

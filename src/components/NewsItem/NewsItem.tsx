@@ -20,6 +20,7 @@ import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { useCallback } from "react";
 import HighlightedText from "../HighlightedText/HighlightedText";
 import { useAppSelector } from "../../hooks/redux-hooks";
+import AnimatedText from "../Animations/AnimatedText";
 
 interface INewsItemProps extends INews {
   handleClick?: (event: UIEvent) => void;
@@ -82,20 +83,22 @@ const NewsItem = ({
               {UserDate.format(new Date(publishedAt))}
             </Typography>
           </Box>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h3">
-              {lightText(title)}
-            </Typography>
-            <Box className="summary__wrapper">
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                className="summary__section"
-              >
-                {lightText(summary)}
+          <AnimatedText>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h3">
+                {lightText(title)}
               </Typography>
-            </Box>
-          </CardContent>
+              <Box className="summary__wrapper">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  className="summary__section"
+                >
+                  {lightText(summary)}
+                </Typography>
+              </Box>
+            </CardContent>
+          </AnimatedText>
         </CardActionArea>
         <CardActions className="card__footer">
           <Button

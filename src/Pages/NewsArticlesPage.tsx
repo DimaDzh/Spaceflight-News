@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
-import AnimatedPage from "./AnimatedPage";
+import AnimatedPage from "../components/Animations/AnimatedPage";
 
 import "./style.scss";
 import Text from "./assets/Text";
